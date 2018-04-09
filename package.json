@@ -1,9 +1,12 @@
 {
-  "name": "@jsec/custom-plugin",
-  "version": "3.0.0",
+  "name": "cordova-plugin-ionic",
+  "version": "2.0.3",
   "cordova": {
-    "id": "custom-plugin",
-    "platforms": ["android"]
+    "id": "cordova-plugin-ionic",
+    "platforms": [
+      "android",
+      "ios"
+    ]
   },
   "description": "Ionic Cordova SDK",
   "engines": {
@@ -13,7 +16,8 @@
       }
     }
   },
-  "repository": "https://github.com/jesuisencours/custom-plugin",
+  "repository": "https://github.com/ionic-team/cordova-plugin-ionic.git",
+  "issue": "https://github.com/ionic-team/cordova-plugin-ionic/issues",
   "keywords": [
     "ionic",
     "cordova",
