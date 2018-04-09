@@ -1,13 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <plugin xmlns="http://apache.org/cordova/ns/plugins/1.0"
-    id="cordova-plugin-ionic"
-    version="3.0.0">
+    id="jsec-custom-plugin"
+    version="3.0.1">
     <name>IonicCordova</name>
     <description>Common Cordova functionality for Ionic apps</description>
     <license>MIT</license>
     <keywords>Ionic,native,html5,hybrid,cordova</keywords>
-    <repo>https://github.com/jesuisencours/custom-plugin</repo>
+    <repo>https://github.com/jesuisencours/custom-plugin.git</repo>
+    <issue>https://github.com/jesuisencours/custom-plugin/issues</issue>
 
     <js-module src="www/common.js">
         <runs/>
