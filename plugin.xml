@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<plugin xmlns="http://apache.org/cordova/ns/plugins/1.0"
+    id="cordova-plugin-ionic"
+    version="2.0.3">
+    <name>IonicCordova</name>
+    <description>Common Cordova functionality for Ionic apps</description>
+    <license>MIT</license>
+    <keywords>Ionic,native,html5,hybrid,cordova</keywords>
+    <repo>https://github.com/ionic-team/cordova-plugin-ionic.git</repo>
+    <issue>https://github.com/ionic-team/cordova-plugin-ionic/issues</issue>
+
+    <js-module src="www/common.js">
+        <runs/>
+        <clobbers target="IonicCordova" />
+    </js-module>
+
+    <preference name="APP_ID" />
+    <preference name="CHANNEL_NAME" />
+    <preference name="UPDATE_API" default="https://api.ionicjs.com" />
+    <preference name="UPDATE_METHOD" default="auto" />
+    <preference name="MAX_STORE" default="2" />
+
+
+    <platform name="android">
+        <config-file target="config.xml" parent="/*">
+            <feature name="IonicCordovaCommon">
+                <param name="android-package" value="com.ionicframework.common.IonicCordovaCommon" onload="true" />
+            </feature>
+
+            <feature name="IonicDeploy">
+                <param name="android-package" value="com.ionicframework.deploy.IonicDeploy"/>
+                <param name="onload" value="true"/>
+            </feature>
+
+            <feature name="IonicPreference">
+                <param name="android-package" value="com.ionicframework.common.IonicPreference" onload="true" />
+            </feature>
+
+            <feature name="IonicPinned">
+                <param name="android-package" value="com.ionicframework.common.IonicPinned" onload="true" />
+            </feature>
+        </config-file>
+
+        <config-file target="res/values/strings.xml" parent="/resources">
+            <string name="ionic_app_id">$APP_ID</string>
+            <string name="ionic_channel_name">$CHANNEL_NAME</string>
+            <string name="ionic_update_api">$UPDATE_API</string>
+            <string name="ionic_update_method">$UPDATE_METHOD</string>
+            <string name="ionic_max_versions">$MAX_STORE</string>
+        </config-file>
+
+        <source-file src="src/android/IonicCordovaCommon.java" target-dir="src/com/ionicframework/common" />
+        <source-file src="src/android/IonicDeploy.java" target-dir="src/com/ionicframework/deploy" />
+        <source-file src="src/android/IonicPreference.java" target-dir="src/com/ionicframework/preference" />
+        <source-file src="src/android/IonicPinned.java" target-dir="src/com/ionicframework/common" /> 
+    </platform>
+
+    <dependency id="cordova-plugin-add-swift-support" version="^1.6.1"/>
+    <dependency id="cordova-plugin-splashscreen" version="^4.0.0"/>
+</plugin>
