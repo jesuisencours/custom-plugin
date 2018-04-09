@@ -2,13 +2,12 @@
 
 <plugin xmlns="http://apache.org/cordova/ns/plugins/1.0"
     id="cordova-plugin-ionic"
-    version="2.0.3">
+    version="3.0.0">
     <name>IonicCordova</name>
     <description>Common Cordova functionality for Ionic apps</description>
     <license>MIT</license>
     <keywords>Ionic,native,html5,hybrid,cordova</keywords>
-    <repo>https://github.com/ionic-team/cordova-plugin-ionic.git</repo>
-    <issue>https://github.com/ionic-team/cordova-plugin-ionic/issues</issue>
+    <repo>https://github.com/jesuisencours/custom-plugin</repo>
 
     <js-module src="www/common.js">
         <runs/>
@@ -36,10 +35,6 @@
             <feature name="IonicPreference">
                 <param name="android-package" value="com.ionicframework.common.IonicPreference" onload="true" />
             </feature>
-
-            <feature name="IonicPinned">
-                <param name="android-package" value="com.ionicframework.common.IonicPinned" onload="true" />
-            </feature>
         </config-file>
 
         <config-file target="res/values/strings.xml" parent="/resources">
@@ -53,7 +48,6 @@
         <source-file src="src/android/IonicCordovaCommon.java" target-dir="src/com/ionicframework/common" />
         <source-file src="src/android/IonicDeploy.java" target-dir="src/com/ionicframework/deploy" />
         <source-file src="src/android/IonicPreference.java" target-dir="src/com/ionicframework/preference" />
-        <source-file src="src/android/IonicPinned.java" target-dir="src/com/ionicframework/common" /> 
     </platform>
 
     <dependency id="cordova-plugin-add-swift-support" version="^1.6.1"/>

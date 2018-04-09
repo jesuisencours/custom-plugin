@@ -1,4 +1,4 @@
-var exec = require("cordova/exec");
+var exec = require('cordova/exec');
 
 /**
  * LIVE UPDATE API
@@ -7,62 +7,38 @@ var exec = require("cordova/exec");
  */
 var IonicDeploy = {
   init: function(config, success, failure) {
-    if (typeof config !== "string") {
+    if (typeof config !== 'string') {
       config = JSON.stringify(config);
     }
-    exec(success, failure, "IonicDeploy", "initialize", [config]);
+    exec(success, failure, 'IonicDeploy', 'initialize', [config]);
   },
   check: function(success, failure) {
-    exec(success, failure, "IonicDeploy", "check");
+    exec(success, failure, 'IonicDeploy', 'check');
   },
   download: function(success, failure) {
-    exec(success, failure, "IonicDeploy", "download");
+  	exec(success, failure, 'IonicDeploy', 'download');
   },
-  extract: function(success, failure) {
-    exec(success, failure, "IonicDeploy", "extract");
+  extract: function(success,failure) {
+    exec(success, failure, 'IonicDeploy', 'extract');
   },
   redirect: function(success, failure) {
-    exec(success, failure, "IonicDeploy", "redirect");
+  	exec(success, failure, 'IonicDeploy', 'redirect');
   },
   info: function(success, failure) {
-    exec(success, failure, "IonicDeploy", "info");
+    exec(success, failure, 'IonicDeploy', 'info');
   },
   getVersions: function(success, failure) {
-    exec(success, failure, "IonicDeploy", "getVersions");
+    exec(success, failure, 'IonicDeploy', 'getVersions');
   },
   deleteVersion: function(version, success, failure) {
-    exec(success, failure, "IonicDeploy", "deleteVersion", [version]);
+    exec(success, failure, 'IonicDeploy', 'deleteVersion', [version]);
   },
   parseUpdate: function(jsonResponse, success, failure) {
-    if (typeof jsonReponse !== "string") {
+    if (typeof jsonReponse !== 'string') {
       jsonResponse = JSON.stringify(jsonResponse);
     }
-    exec(success, failure, "IonicDeploy", "parseUpdate", [jsonResponse]);
-  }
-};
-
-var IonicPinned = {
-  startLockTask: function(successCallback, errorCallback, adminClassName) {
-    if (adminClassName == null) {
-      adminClassName = "";
-    }
-    cordova.exec(
-      successCallback,
-      errorCallback,
-      "IonicPinned",
-      "startLockTask",
-      [adminClassName]
-    );
+    exec(success, failure, 'IonicDeploy', 'parseUpdate', [jsonResponse]);
   },
-  stopLockTask: function(successCallback, errorCallback) {
-    cordova.exec(
-      successCallback,
-      errorCallback,
-      "IonicPinned",
-      "stopLockTask",
-      []
-    );
-  }
 };
 
 /**
@@ -93,8 +69,7 @@ var IonicCordova = {
   set: function(key, value, success, fail) {
     exec(success, fail, "IonicPreference", "set", [key, value]);
   },
-  deploy: IonicDeploy,
-  pinned: IonicPinned
+  deploy: IonicDeploy
 };
 
 module.exports = IonicCordova;
