@@ -739,7 +739,10 @@ public class IonicDeploy extends CordovaPlugin {
     }catch (JSONException e) {
       logMessage("POST_CHECK_ERR", e.getMessage());
       response.error = true;
-    } 
+    }catch (Exception e) {
+      logMessage("POST_CHECK_ERR", e.getMessage());
+      response.error = true;
+    }
     return response;
   }
 
