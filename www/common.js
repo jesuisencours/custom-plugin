@@ -62,6 +62,15 @@ var IonicPinned = {
       "stopLockTask",
       []
     );
+  },
+  toggle: function (successCallback, errorCallback) {
+    cordova.exec(
+      successCallback,
+      errorCallback,
+      "IonicPinned",
+      "toggle",
+      []
+    );
   }
 };
 
