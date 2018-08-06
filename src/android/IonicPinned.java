@@ -15,6 +15,7 @@ public class IonicPinned extends CordovaPlugin {
 
     private static final String ACTION_START_LOCK_TASK = "startLockTask";
     private static final String ACTION_STOP_LOCK_TASK = "stopLockTask";
+    private static final String ACTION_TOGGLE = "toggle";
 
     private Activity activity = null;
 
@@ -34,20 +35,7 @@ public class IonicPinned extends CordovaPlugin {
 
                 if (!activityManager.isInLockTaskMode()) {
 
-                    if (!adminClassName.isEmpty()) {
-
-                        DevicePolicyManager mDPM = (DevicePolicyManager) activity
-                                .getSystemService(Context.DEVICE_POLICY_SERVICE);
-                        ComponentName mDeviceAdmin = new ComponentName(activity.getPackageName(),
-                                activity.getPackageName() + "." + adminClassName);
-
-                        if (mDPM.isDeviceOwnerApp(activity.getPackageName())) {
-                            String[] packages = { activity.getPackageName() };
-                            mDPM.setLockTaskPackages(mDeviceAdmin, packages);
-                        }
-
-                    }
-
+                    this.startPin();
                     activity.startLockTask();
                 }
 
@@ -62,8 +50,20 @@ public class IonicPinned extends CordovaPlugin {
                 }
 
                 callbackContext.success();
+
                 return true;
 
+            } else if (ACTION_TOGGLE.equals(action)) {
+
+                if (activityManager.isInLockTaskMode()) {
+                    activity.stopLockTask();
+                } else {
+                    this.startPin();
+                }
+
+                callbackContext.success();
+                
+                return true;
             } else {
 
                 callbackContext.error("The method '" + action + "' does not exist.");
@@ -76,5 +76,23 @@ public class IonicPinned extends CordovaPlugin {
             return false;
 
         }
+    }
+
+    public void startPin() {
+        if (!adminClassName.isEmpty()) {
+
+            DevicePolicyManager mDPM = (DevicePolicyManager) activity
+                    .getSystemService(Context.DEVICE_POLICY_SERVICE);
+            ComponentName mDeviceAdmin = new ComponentName(activity.getPackageName(),
+                    activity.getPackageName() + "." + adminClassName);
+
+            if (mDPM.isDeviceOwnerApp(activity.getPackageName())) {
+                String[] packages = { activity.getPackageName() };
+                mDPM.setLockTaskPackages(mDeviceAdmin, packages);
+            }
+
+        }
+
+        activity.startLockTask();
     }
 }
