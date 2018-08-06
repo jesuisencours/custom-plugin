@@ -35,7 +35,20 @@ public class IonicPinned extends CordovaPlugin {
 
                 if (!activityManager.isInLockTaskMode()) {
 
-                    this.startPin();
+                    if (!adminClassName.isEmpty()) {
+
+                        DevicePolicyManager mDPM = (DevicePolicyManager) activity
+                                .getSystemService(Context.DEVICE_POLICY_SERVICE);
+                        ComponentName mDeviceAdmin = new ComponentName(activity.getPackageName(),
+                                activity.getPackageName() + "." + adminClassName);
+
+                        if (mDPM.isDeviceOwnerApp(activity.getPackageName())) {
+                            String[] packages = { activity.getPackageName() };
+                            mDPM.setLockTaskPackages(mDeviceAdmin, packages);
+                        }
+
+                    }
+
                     activity.startLockTask();
                 }
 
@@ -50,19 +63,32 @@ public class IonicPinned extends CordovaPlugin {
                 }
 
                 callbackContext.success();
-
                 return true;
 
             } else if (ACTION_TOGGLE.equals(action)) {
 
-                if (activityManager.isInLockTaskMode()) {
+                if(activityManager.isInLockTaskMode()) {
                     activity.stopLockTask();
-                } else {
-                    this.startPin();
-                }
+                }else {
+                    if (!adminClassName.isEmpty()) {
 
-                callbackContext.success();
+                        DevicePolicyManager mDPM = (DevicePolicyManager) activity
+                                .getSystemService(Context.DEVICE_POLICY_SERVICE);
+                        ComponentName mDeviceAdmin = new ComponentName(activity.getPackageName(),
+                                activity.getPackageName() + "." + adminClassName);
+
+                        if (mDPM.isDeviceOwnerApp(activity.getPackageName())) {
+                            String[] packages = { activity.getPackageName() };
+                            mDPM.setLockTaskPackages(mDeviceAdmin, packages);
+                        }
+
+                    }
+
+                    activity.startLockTask();
+                }
                 
+                callbackContext.success();
+
                 return true;
             } else {
 
@@ -76,23 +102,5 @@ public class IonicPinned extends CordovaPlugin {
             return false;
 
         }
-    }
-
-    public void startPin() {
-        if (!adminClassName.isEmpty()) {
-
-            DevicePolicyManager mDPM = (DevicePolicyManager) activity
-                    .getSystemService(Context.DEVICE_POLICY_SERVICE);
-            ComponentName mDeviceAdmin = new ComponentName(activity.getPackageName(),
-                    activity.getPackageName() + "." + adminClassName);
-
-            if (mDPM.isDeviceOwnerApp(activity.getPackageName())) {
-                String[] packages = { activity.getPackageName() };
-                mDPM.setLockTaskPackages(mDeviceAdmin, packages);
-            }
-
-        }
-
-        activity.startLockTask();
     }
 }
