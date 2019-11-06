@@ -57,5 +57,4 @@
     </platform>
 
     <dependency id="cordova-plugin-add-swift-support" version="^1.6.1"/>
-    <dependency id="cordova-plugin-splashscreen" version="^4.0.0"/>
 </plugin>
