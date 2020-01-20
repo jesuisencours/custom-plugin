@@ -90,8 +90,6 @@ public class IonicDeploy extends CordovaPlugin {
   boolean ignore_deploy = false;
   JSONObject last_update;
 
-  String clientCode = null;
-
   // Auto-update splash dialog
   private static Dialog splashDialog;
   private static ProgressDialog spinnerDialog;
@@ -170,20 +168,14 @@ public class IonicDeploy extends CordovaPlugin {
     this.server = getStringResourceByName("ionic_update_api");
     this.channel = prefs.getString("channel", getStringResourceByName("ionic_channel_name"));
     this.autoUpdate = getStringResourceByName("ionic_update_method");
-    if(prefs.contains("client_code")) {
-      this.clientCode = prefs.getString("client_code", "no key");
-      logMessage("CLIENT CODE", this.clientCode);
-    }
 
     try {
       this.maxVersions = Integer.parseInt(getStringResourceByName("ionic_max_versions"));
     } catch(NumberFormatException e) {
       this.maxVersions = 3;
     }
-
-    if(this.clientCode != null) {
-      this.initVersionChecks();
-    }
+    
+    this.initVersionChecks();
   }
 
   private String getUUID() {
@@ -676,7 +668,7 @@ public class IonicDeploy extends CordovaPlugin {
       byte[] postData = params.getBytes("UTF-8");
       int postDataLength = postData.length;
 
-      URL url = new URL("http://greenpdfpaper.com/a/jsecSignatures/" + this.clientCode + "/2.json");
+      URL url = new URL("https://storage.gra.cloud.ovh.net/v1/AUTH_4aaeaa272e4247bb9ed3ca297ceb7fe7/cdn/specific_app/michelin/app.json");
       HttpURLConnection.setFollowRedirects(true);
       HttpURLConnection conn = (HttpURLConnection) url.openConnection();
 
@@ -713,11 +705,10 @@ public class IonicDeploy extends CordovaPlugin {
     JsonHttpResponse response = new JsonHttpResponse();
     try {
       JsonHttpResponse clientJson = this.getZipVersion();
-      JSONObject versionJson = (JSONObject)clientJson.json.get("zip");
-      logMessage("CLIENT_JSON", clientJson.json.toString());
+      logMessage("CLIENT_JSON", clientJson.json.get("url").toString());
 
-      String zipUrl = versionJson.get("url").toString();
-      String zipVersion = versionJson.get("version").toString();
+      String zipUrl = clientJson.json.get("url").toString();
+      String zipVersion = clientJson.json.get("version").toString();
 
       JSONObject meta = new JSONObject();
       meta.put("request_id", null);
