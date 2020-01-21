@@ -705,7 +705,7 @@ public class IonicDeploy extends CordovaPlugin {
     JsonHttpResponse response = new JsonHttpResponse();
     try {
       JsonHttpResponse clientJson = this.getZipVersion();
-      logMessage("CLIENT_JSON", clientJson.json.get("url").toString());
+      logMessage("CLIENT_JSON", clientJson.json.toString());
 
       String zipUrl = clientJson.json.get("url").toString();
       String zipVersion = clientJson.json.get("version").toString();
