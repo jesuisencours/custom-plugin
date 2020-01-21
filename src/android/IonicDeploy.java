@@ -689,13 +689,13 @@ public class IonicDeploy extends CordovaPlugin {
       response.json = jsonResponse;
       logMessage("GET_ZIP_RES", jsonResponse.toString(2));
     } catch (JSONException e) {
-      logMessage("GET_ZIP_ERR", e.getMessage());
+      logMessage("GET_ZIP_ERR 1", e.getMessage());
       response.error = true;
     } catch (MalformedURLException e) {
-      logMessage("GET_ZIP_ERR", e.getMessage());
+      logMessage("GET_ZIP_ERR 2", e.getMessage());
       response.error = true;
     } catch (IOException e) {
-      logMessage("GET_ZIP_ERR", e.getMessage());
+      logMessage("GET_ZIP_ERR 3", e.getMessage());
       response.error = true;
     }
     return response;
