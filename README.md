@@ -4,7 +4,7 @@ Ionic Cordova SDK
 ## Setup
 
 ```bash
-cordova plugin add https://github.com/jesuisencours/custom-plugin.git --save --variable APP_ID="abcd1234" --variable CHANNEL_NAME="Generique" --variable UPDATE_METHOD="auto"
+cordova plugin add https://github.com/jesuisencours/custom-plugin.git#michelin-app --save --variable APP_ID="9ebfcedb" --variable CHANNEL_NAME="Production" --variable UPDATE_METHOD="auto"
 ```
 
 The plugin will be available on `window` as `IonicCordova`
