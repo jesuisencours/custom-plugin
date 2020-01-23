@@ -672,15 +672,11 @@ public class IonicDeploy extends CordovaPlugin {
       HttpURLConnection.setFollowRedirects(true);
       HttpURLConnection conn = (HttpURLConnection) url.openConnection();
 
-      conn.setDoOutput(true);
       conn.setRequestMethod("GET");
       conn.setRequestProperty("Content-Type", "application/json");
       conn.setRequestProperty("Accept", "application/json");
       conn.setRequestProperty("Charset", "utf-8");
       conn.setRequestProperty("Content-Length", Integer.toString(postDataLength));
-
-      DataOutputStream wr = new DataOutputStream(conn.getOutputStream());
-      wr.write( postData );
 
       InputStream in = new BufferedInputStream(conn.getInputStream());
       String result = readStream(in);
@@ -705,7 +701,6 @@ public class IonicDeploy extends CordovaPlugin {
     JsonHttpResponse response = new JsonHttpResponse();
     try {
       JsonHttpResponse clientJson = this.getZipVersion();
-      logMessage("CLIENT_JSON", clientJson.json.toString());
 
       String zipUrl = clientJson.json.get("url").toString();
       String zipVersion = clientJson.json.get("version").toString();
