@@ -175,7 +175,7 @@ public class IonicDeploy extends CordovaPlugin {
       this.maxVersions = 3;
     }
     
-    this.initVersionChecks();
+    // this.initVersionChecks();
   }
 
   private String getUUID() {
